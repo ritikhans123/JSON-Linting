@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Linting</title>
+    <style>
+        h1 { color: blue; }
+        #jsonInput { width: 50%; height: 150px; }
+        #resultContainer { margin-top: 10px; white-space: pre-wrap; }
+        #errorContainer { color: red; }
+        button { background-color: greenyellow; }
+    </style>
+    <script>
+        function lintJson() {
+            var jsonInput = document.getElementById('jsonInput').value;
+            var resultContainer = document.getElementById('resultContainer');
+            var errorContainer = document.getElementById('errorContainer');
+
+            try {
+                var jsonObject = JSON.parse(jsonInput);
+                resultContainer.innerHTML = 'JSON is valid!\n\nParsed JSON:\n' + JSON.stringify(jsonObject, null, 2);
+                errorContainer.innerHTML = ''; // Clear any previous error messages
+            } catch (error) {
+                resultContainer.innerHTML = '';
+                errorContainer.innerHTML = 'JSON is not valid. Error: ' + error.message;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>JSON Linting</h1>
+    <label for="jsonInput">Enter JSON Code:</label>
+    <textarea id="jsonInput"></textarea>
+    <br>
+    <button type="button" onclick="lintJson()">JSON Linting</button>
+    <div id="resultContainer"></div>
+    <div id="errorContainer"></div>
+</body>
+</html>
